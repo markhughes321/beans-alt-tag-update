@@ -1,0 +1,17 @@
+{
+  "name": "beans-alt-tag-updater",
+  "version": "1.0.6",
+  "description": "Node.js application to update missing alt tags for images on Beans.ie Shopify store",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dry": "node index.js --dry-run"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "openai": "^4.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
