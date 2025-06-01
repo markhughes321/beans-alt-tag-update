@@ -1,0 +1,40 @@
+name: Beans.ie Alt Tag Updater
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Run at 12:00 AM UTC on the 1st of each month
+  workflow_dispatch: # Allow manual triggering for testing
+
+jobs:
+  update-alt-tags:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run alt tag updater
+        env:
+          SHOPIFY_SHOP_NAME: ${{ secrets.SHOPIFY_SHOP_NAME }}
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          npm run start | tee output.log
+        continue-on-error: true # Continue to upload logs even if the script fails
+
+      - name: Upload output log
+        if: always() # Upload log even on failure
+        uses: actions/upload-artifact@v4
+        with:
+          name: alt-tag-updater-log
+          path: output.log
+          retention-days: 7

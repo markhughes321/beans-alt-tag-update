@@ -1,4 +1,4 @@
-Beans Alt Tag Updater
+Beans Alt Tag Update
 =====================
 
 A Node.js application to automatically generate and apply SEO-optimized alt tags for images on the Beans.ie Shopify store using OpenAI's gpt-4o model. The app fetches images from Shopify, generates descriptive alt tags, and updates them in batches with rate limit handling.
@@ -21,7 +21,7 @@ Installation
 
     ```
     git clone <repository-url>
-    cd beans-alt-tag-updater
+    cd beans-alt-tag-update
     ```
 
 2.  Install dependencies:
